@@ -3,7 +3,7 @@ import csv
 from src.utils import print_board, is_in_board, neighbors
 import random
 
-#check if ship is destroyed
+#check if a ship is destroyed
 def ship_destroyed(ship, board):
     for cell in ship:
         x = cell[0]
@@ -14,6 +14,7 @@ def ship_destroyed(ship, board):
         
     return True
 
+#check is all ships are destroyed
 def all_ships_destroyed(ships, board):
     for ship in ships:
         for cell in ship:
@@ -25,6 +26,7 @@ def all_ships_destroyed(ships, board):
             
     return True
 
+#mark neighbors of cell as *
 def mark_neighbors(ship, board):
     for cell in ship:
         x = cell[0]
@@ -50,6 +52,7 @@ def board_to_string(board):
 
     return result
 
+#determine the orientation of the ship
 def get_ship_orientation(hits):
     if len(hits) < 2:
         return None
@@ -59,6 +62,7 @@ def get_ship_orientation(hits):
     else:
         return "V"
 
+#save information to game_state.csv
 def save_game_state(turn, player_move, bot_move, player_board, bot_board):
     with open("data/game_state.csv", "a", newline="") as f:
         writer = csv.writer(f)
@@ -74,7 +78,7 @@ def save_game_state(turn, player_move, bot_move, player_board, bot_board):
             bot_board_str
         ])
 
-
+#determine the bot's next step
 def bot_choose_target(player_board, bot_hits, last_hits):
     board_size = 10
 
@@ -101,11 +105,7 @@ def bot_choose_target(player_board, bot_hits, last_hits):
         if (b_x, b_y) not in bot_hits:
             return b_x, b_y
 
-
-
-
-
-
+#main logic of a game
 def play_game(player_board, bot_board, player_ships, bot_ships):
     turn = 1
     player_hits = set() 
@@ -117,12 +117,12 @@ def play_game(player_board, bot_board, player_ships, bot_ships):
         print("Your turn")
         
         while True:
-            input_ = input("Enter coordinates to shoot (x y) or 'exit' to quit: ").strip()
+            input_ = input("Enter coordinates to shoot (x y) or 'exit' to quit: ").strip() #remove extra spaces
             if input_.lower() == "exit":
                 print("Game ended")
                 sys.exit()
             try:
-                x_str, y_str = input_.split()
+                x_str, y_str = input_.split() #split into list of strings
                 x = int(x_str)
                 y = int(y_str)
                 if not is_in_board(x, y):
@@ -156,7 +156,6 @@ def play_game(player_board, bot_board, player_ships, bot_ships):
             print("\nYOU WIN!")
             return
 
-
         print("\nBot's turn")
         bx, by = bot_choose_target(player_board, bot_hits, bot_last_hits)
 
@@ -186,4 +185,3 @@ def play_game(player_board, bot_board, player_ships, bot_ships):
             return
 
         turn += 1
-
