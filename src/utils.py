@@ -7,6 +7,7 @@ board_size = 10
 # X - hit
 # * - miss
 
+#create empty board
 def empty_board():
     board = []
     for _ in range(board_size):
@@ -16,9 +17,11 @@ def empty_board():
         board.append(row)
     return board
 
+#check if coordinates are in board
 def is_in_board(x, y):
     return 0<=x<board_size and 0<=y<board_size
 
+#return a list of neighbors
 def neighbors(x, y):
     res = []
     for x_ in [-1, 0, 1]: #directions
@@ -31,7 +34,7 @@ def neighbors(x, y):
                 res.append((new_x, new_y))
     return res
 
-
+#print board
 def print_board(board, hide_ships = False): #if sym is ship, then make it .
     print("  0 1 2 3 4 5 6 7 8 9") # column numbers
     for i in range(board_size):
@@ -46,6 +49,7 @@ def print_board(board, hide_ships = False): #if sym is ship, then make it .
         
         print()
 
+#save ships to csv file
 def save_ships_to_csv(ships, filename):
     #each row in csv is one ship cell
     with open(filename, "w", newline = "") as f:
