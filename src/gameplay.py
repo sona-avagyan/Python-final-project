@@ -54,7 +54,7 @@ def get_ship_orientation(hits):
         return None
     (x1, y1), (x2, y2) = hits[0], hits[1]
     if x1 == x2:
-        return "H"  # горизонтальный
+        return "H" 
     else:
         return "V"
 
