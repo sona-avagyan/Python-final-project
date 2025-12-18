@@ -93,13 +93,12 @@ def bot_choose_target(player_board, bot_hits, last_hits):
                 if 0 <= nx < board_size and 0 <= ny < board_size:
                     if (nx, ny) not in bot_hits:
                         return nx, ny
-
-    # Если добить нельзя — случайный выстрел
+                    
     while True:
-        bx = random.randint(0,9)
-        by = random.randint(0,9)
-        if (bx, by) not in bot_hits:
-            return bx, by
+        b_x = random.randint(0,9)
+        b_y = random.randint(0,9)
+        if (b_x, b_y) not in bot_hits:
+            return b_x, b_y
 
 
 
