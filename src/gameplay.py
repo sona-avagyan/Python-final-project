@@ -3,6 +3,7 @@ import csv
 from src.utils import print_board, is_in_board, neighbors
 import random
 
+#check if ship is destroyed
 def ship_destroyed(ship, board):
     for cell in ship:
         x = cell[0]
